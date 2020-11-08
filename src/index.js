@@ -1,30 +1,23 @@
-import { createStore } from "./redux/index.js";
+import { createStore } from './redux/index.js';
+import reducer from './reducer.js';
 
 let initState = {
     counter: {
         count: 0,
     },
     info: {
-        name: "",
-        desc: "",
+        name: '',
+        desc: '',
     },
 };
 
-let store = createStore(initState);
+let store = createStore(reducer, initState);
 
 store.subscribe(() => {
     let state = store.getState();
-    console.log(`${state.info.name}: ${state.info.desc}`);
-});
-store.subscribe(() => {
-    let state = store.getState();
-    console.log(`${state.counter.count} 🍎`);
+    console.log(store.getState(), '🍎');
 });
 
-store.changeState({
-    ...store.getState(),
-    info: {
-        name: "Edward",
-        desc: "Awesome",
-    },
+store.dispatch({
+    type: 'INCREMENT',
 });
