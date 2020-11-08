@@ -1,0 +1,11 @@
+{
+  "name": "redux-impl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Angelki/redux-impl.git",
+  "author": "edward <3zangelks@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.0.5"
+  }
+}
