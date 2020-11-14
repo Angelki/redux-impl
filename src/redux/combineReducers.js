@@ -1,6 +1,6 @@
 export default function combineReducers(reducers) {
     const reducersKeys = Object.keys(reducers);
-    return function combination(state, action) {
+    return function combination(state = {}, action) {
         const nextState = {};
         for (let i = 0; i < reducersKeys.length; i++) {
             const key = reducersKeys[i];

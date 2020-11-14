@@ -18,6 +18,7 @@ export default function createStore(reducer, initState) {
         return state;
     }
 
+    dispatch({ type: Symbol('init') });
     return {
         subscribe,
         getState,
