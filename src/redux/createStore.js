@@ -14,6 +14,11 @@ export default function createStore(reducer, initState) {
         }
     }
 
+    function replaceReducer(nextReducer) {
+        reducer = nextReducer;
+        dispatch({ type: Symbol('replace') });
+    }
+
     function getState() {
         return state;
     }
@@ -23,5 +28,6 @@ export default function createStore(reducer, initState) {
         subscribe,
         getState,
         dispatch,
+        replaceReducer,
     };
 }

@@ -14,10 +14,15 @@ import info from './reducers/info.js';
 
 const reducer = combineReducers({
     counter: counter,
-    info: info,
 });
 
 let store = createStore(reducer);
+const nextReducer = combineReducers({
+    counter: counter,
+    info: info,
+});
+store.replaceReducer(nextReducer);
+
 let state = store.getState();
 console.log(state, '🍎');
 
