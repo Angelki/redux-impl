@@ -1,9 +1,13 @@
-import { createStore, combineReducers } from './redux/index.js';
+import {
+    createStore,
+    combineReducers,
+    applyMiddleware,
+} from './redux/index.js';
 import counter from './reducers/counter.js';
 import info from './reducers/info.js';
-import exceptionMiddleware from './middlewares/exceptionMiddleware.js';
-import loggerMiddleware from './middlewares/loggerMiddleware.js';
-import timeMiddleware from './middlewares/timeMiddleware.js';
+import exceptionMiddleware from './middleware/exceptionMiddleware.js';
+import loggerMiddleware from './middleware/loggerMiddleware.js';
+import timeMiddleware from './middleware/timeMiddleware.js';
 
 // let initState = {
 //     counter: {
@@ -19,12 +23,17 @@ const reducer = combineReducers({
     counter: counter,
 });
 
-let store = createStore(reducer);
-const next = store.dispatch;
-const time = timeMiddleware(store);
-const logger = loggerMiddleware(store);
-const exception = exceptionMiddleware(store);
-store.dispatch = exception(time(logger(next)));
+// const next = store.dispatch;
+// const time = timeMiddleware(store);
+// const logger = loggerMiddleware(store);
+// const exception = exceptionMiddleware(store);
+// store.dispatch = exception(time(logger(next)));
+const rewriteMiddleware = applyMiddleware(
+    exceptionMiddleware,
+    timeMiddleware,
+    loggerMiddleware,
+);
+let store = createStore(reducer, {}, rewriteMiddleware);
 const nextReducer = combineReducers({
     counter: counter,
     info: info,

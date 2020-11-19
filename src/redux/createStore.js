@@ -1,4 +1,7 @@
-export default function createStore(reducer, initState) {
+export default function createStore(reducer, initState, rewriteMiddleware) {
+    if (rewriteMiddleware) {
+        return rewriteMiddleware(createStore)(reducer, initState);
+    }
     let state = initState;
     let listeners = [];
 
