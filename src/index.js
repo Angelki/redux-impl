@@ -1,6 +1,9 @@
 import { createStore, combineReducers } from './redux/index.js';
 import counter from './reducers/counter.js';
 import info from './reducers/info.js';
+import exceptionMiddleware from './middlewares/exceptionMiddleware.js';
+import loggerMiddleware from './middlewares/loggerMiddleware.js';
+import timeMiddleware from './middlewares/timeMiddleware.js';
 
 // let initState = {
 //     counter: {
@@ -17,6 +20,11 @@ const reducer = combineReducers({
 });
 
 let store = createStore(reducer);
+const next = store.dispatch;
+const time = timeMiddleware(store);
+const logger = loggerMiddleware(store);
+const exception = exceptionMiddleware(store);
+store.dispatch = exception(time(logger(next)));
 const nextReducer = combineReducers({
     counter: counter,
     info: info,
