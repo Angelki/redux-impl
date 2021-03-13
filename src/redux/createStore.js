@@ -4,9 +4,21 @@ export default function createStore(reducer, initState, rewriteMiddleware) {
     }
     let state = initState;
     let listeners = [];
+    let currentListeners = [];
+    let nextListeners = currentListeners;
+    let isDispatching = false;
 
     function subscribe(listener) {
         listeners.push(listener);
+        // 返回一个取消订阅
+        return function unsubscribe() {
+            if (nextListeners === currentListeners) {
+                nextListeners = currentListeners.slice();
+            }
+            const index = nextListeners.indexOf(listener);
+            nextListeners.splice(index, 1);
+            currentListeners = null;
+        };
     }
 
     function dispatch(action) {
