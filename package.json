@@ -6,6 +6,7 @@
   "author": "edward <3zangelks@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "react": "^17.0.1",
     "redux": "^4.0.5"
   }
 }
