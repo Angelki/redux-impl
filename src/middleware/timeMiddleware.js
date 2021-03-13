@@ -1,5 +1,5 @@
 const timeMiddleware = (store) => (next) => (action) => {
-    console.log(new Date().getTime(), '🍎');
+    console.log(new Date().getTime(), action, '🍎');
     next(action);
 };
 

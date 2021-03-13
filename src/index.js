@@ -44,22 +44,21 @@ const nextReducer = combineReducers({
 store.replaceReducer(nextReducer);
 
 let state = store.getState();
-console.log(state, '🍎');
 
 store.subscribe(() => {
     let state = store.getState();
     console.log(store.getState(), '📷');
 });
 
-store.dispatch({
-    type: 'INCREMENT',
-});
-store.dispatch({
-    type: 'SET_NAME',
-    payload: {
-        name: 'hhhhh',
-    },
-});
+// store.dispatch({
+//     type: 'INCREMENT',
+// });
+// store.dispatch({
+//     type: 'SET_NAME',
+//     payload: {
+//         name: 'hhhhh',
+//     },
+// });
 
 const actions = bindActionCreators(
     {
