@@ -2,12 +2,15 @@ import {
     createStore,
     combineReducers,
     applyMiddleware,
+    bindActionCreators,
 } from './redux/index.js';
 import counter from './reducers/counter.js';
 import info from './reducers/info.js';
 import exceptionMiddleware from './middleware/exceptionMiddleware.js';
 import loggerMiddleware from './middleware/loggerMiddleware.js';
 import timeMiddleware from './middleware/timeMiddleware.js';
+import { increment } from './actions/counter.js';
+import { setName } from './actions/info.js';
 
 // let initState = {
 //     counter: {
@@ -57,3 +60,13 @@ store.dispatch({
         name: 'hhhhh',
     },
 });
+
+const actions = bindActionCreators(
+    {
+        increment,
+        setName,
+    },
+    store.dispatch,
+);
+actions.increment();
+actions.setName();
